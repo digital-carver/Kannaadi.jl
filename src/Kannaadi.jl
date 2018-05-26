@@ -1,5 +1,7 @@
 module Kannaadi
 
-# package code goes here
+include("utf8.jl")
+
+
 
 end # module
