@@ -1,6 +1,9 @@
 
 module utf8
 
+export எழுத்துவகை_பிரி, மாத்திரை_அளவெடு, துப்புரவு_செய், தமிழுரையா
+export உயிரெழுத்துக்கள், புள்ளி, ஆய்தம்
+
 using Unicode
 
 const உயிரெழுத்துக்கள் = ["அ", "ஆ", "இ", "ஈ", "உ", "ஊ", "எ", "ஏ", "ஐ", "ஒ", "ஓ", "ஔ"]
@@ -8,9 +11,8 @@ const உயிர்ப்பகுதிகள் = ['ா', 'ி', 'ீ', 'ு
 const புள்ளி = '்'
 const ஆய்தம் = "ஃ"
 
-எழுத்துவகை_பிரி(l::String) = எழுத்துவகை_பிரி(SubString(l))
-எழுத்துவகை_பிரி(l::Char) = எழுத்துவகை_பிரி(SubString(string(l)))
-function எழுத்துவகை_பிரி(எழுத்து::SubString) #FIXME: needs better return type idea
+எழுத்துவகை_பிரி(l::Char) = எழுத்துவகை_பிரி(string(l))
+function எழுத்துவகை_பிரி(எழுத்து::AbstractString) #FIXME: needs better return type idea
     எழுத்து == ஆய்தம் && return :ஆய்தம்
     if எழுத்து in உயிரெழுத்துக்கள்
         return :உயிர்
@@ -30,6 +32,7 @@ function எழுத்துவகை_பிரி(எழுத்து::SubS
 end
 const classify_letter = எழுத்துவகை_பிரி
 
+மாத்திரை_அளவெடு(l::Char) = மாத்திரை_அளவெடு(string(l))
 function மாத்திரை_அளவெடு(எழுத்து::AbstractString)
     எழுத்துவகை = எழுத்துவகை_பிரி(எழுத்து)
 
@@ -58,19 +61,19 @@ function மாத்திரை_அளவெடு(எழுத்து::Abst
 end
 const get_vowel_length = மாத்திரை_அளவெடு
 
-function ஓரெழுத்து_உறுதிசெய்(எழுத்து::SubString)
+ஓரெழுத்து_உறுதிசெய்(l::Char) = true
+function ஓரெழுத்து_உறுதிசெய்(எழுத்து::AbstractString)
     if length(Unicode.graphemes(எழுத்து)) > 1
         throw(ArgumentError("ஒரு எழுத்தை மட்டும் கொடுக்கவும் (கொடுத்தது: $எழுத்து) (E:ARG_GM)"))
     end
+    true
 end
 const assert_single_grapheme = ஓரெழுத்து_உறுதிசெய்
 
-function தமிழுரையா(எழுத்து::SubString)
+function தமிழுரையா(எழுத்து::AbstractString)
     ismatch(r"^\p{Tamil}+$", எழுத்து)
 end
 const is_tamil_text = தமிழுரையா
-
-export துப்புரவு_செய், cleanup
 
 """
 துப்புரவு_செய்(உரை) -> தமிழுரை
