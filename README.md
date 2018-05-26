@@ -6,8 +6,8 @@
 
 [![codecov.io](http://codecov.io/github/digital-carver/Kannaadi.jl/coverage.svg?branch=master)](http://codecov.io/github/digital-carver/Kannaadi.jl?branch=master)
 
-தமிழுக்கான ஒரு ஜூலியா தொகுப்பு (தமிழ் உரை படிக்க இது ஒரு 'கண்ணாடி'). [ஓபன்-தமிழ்](https://github.com/Ezhil-Language-Foundation/open-tamil) திட்டத்தால் தூண்டப்பட்டது.
+தமிழுக்கான ஒரு ஜூலியா தொகுப்பு (தமிழ் உரை படிக்க இது ஒரு 'கண்ணாடி'). [ஓபன்-தமிழ்](https://github.com/Ezhil-Language-Foundation/open-tamil) திட்டத்தால் ஊக்குவிக்கப்பட்டது.
 
 Julia module for working with Tamil (a Kannaadi for reading Tamil text). Inspired by [open-tamil](https://github.com/Ezhil-Language-Foundation/open-tamil).
 
-(Written for and tested on Julia v0.7)
+Written for and tested on Julia v0.7 (as of May 2018).
