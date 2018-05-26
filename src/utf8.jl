@@ -1,6 +1,4 @@
 
-module utf8
-
 export எழுத்துவகை_பிரி, மாத்திரை_அளவெடு, துப்புரவு_செய், தமிழுரையா
 export உயிரெழுத்துக்கள், புள்ளி, ஆய்தம்
 
@@ -88,5 +86,3 @@ function துப்புரவு_செய்(உரை::AbstractString, எ
     return தமிழுரை
 end
 const cleanup = துப்புரவு_செய்
-
-end #module
