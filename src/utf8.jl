@@ -2,7 +2,9 @@
 export எழுத்துவகை_பிரி, மாத்திரை_அளவெடு, துப்புரவு_செய், தமிழுரையா
 export உயிரெழுத்துக்கள், புள்ளி, ஆய்தம்
 
-using Unicode
+if VERSION > v"0.7.0" #FIXME: should use DEV build that made the change
+    using Unicode: graphemes
+end
 
 const உயிரெழுத்துக்கள் = ["அ", "ஆ", "இ", "ஈ", "உ", "ஊ", "எ", "ஏ", "ஐ", "ஒ", "ஓ", "ஔ"]
 const வல்லினங்கள் = ["க", "ச", "ட", "த", "ப", "ற"]
@@ -23,11 +25,11 @@ function எழுத்துவகை_பிரி(எழுத்து::Abst
     ஓரெழுத்து_உறுதிசெய்(எழுத்து)
     தமிழுரையா(எழுத்து) || throw(ArgumentError("கொடுத்த குறி $எழுத்து தமிழ் எழுத்தல்ல (E:ARG_NT)"))
 
-	if length(எழுத்து) == 1
+    if length(எழுத்து) == 1
         return :எழுத்தல்ல #தமிழ் எண்கள், நாட்காட்டிக் குறிப்புகள், முதலியவை (இப்போதைக்கு கிரந்தங்களும்)
     end
 
-	எழுத்துப்பகுதி = எழுத்து[nextind(எழுத்து, 1)]
+    எழுத்துப்பகுதி = எழுத்து[nextind(எழுத்து, 1)]
     எழுத்துப்பகுதி == புள்ளி && return :மெய்
     எழுத்துப்பகுதி in உயிர்ப்பகுதிகள் && return :உயிர்மெய்
 end
@@ -64,7 +66,7 @@ const get_vowel_length = மாத்திரை_அளவெடு
 
 ஓரெழுத்து_உறுதிசெய்(l::Char) = true
 function ஓரெழுத்து_உறுதிசெய்(எழுத்து::AbstractString)
-    if length(Unicode.graphemes(எழுத்து)) > 1
+    if length(graphemes(எழுத்து)) > 1
         throw(ArgumentError("ஒரு எழுத்தை மட்டும் கொடுக்கவும் (கொடுத்தது: $எழுத்து) (E:ARG_GM)"))
     end
     true
@@ -83,7 +85,11 @@ const is_tamil_text = தமிழுரையா
 """
 function துப்புரவு_செய்(உரை::AbstractString, எச்சரி=false)
     #TODO: add options to leave punctutations, digits, etc. in
-    தமிழுரை = replace(உரை, r"[^\p{Tamil}\s]" => "")
+    if VERSION > v"0.7.0" #FIXME: should use DEV build that made the change
+        தமிழுரை = replace(உரை, r"[^\p{Tamil}\s]" => "")
+    else
+        தமிழுரை = replace(உரை, r"[^\p{Tamil}\s]", "")
+    end
     நீக்கப்பட்டன = length(உரை) - length(தமிழுரை)
     if எச்சரி && (நீக்கப்பட்டன > 0)
         warn("தமிழல்லாத $(நீக்கப்பட்டன) எழுத்துக்கள் உரையிலிருந்து நீக்கப்பட்டன")
