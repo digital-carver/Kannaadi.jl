@@ -1,7 +1,7 @@
 # Kannaadi
 
 [![Travis Build Status](https://travis-ci.org/digital-carver/Kannaadi.jl.svg?branch=master)](https://travis-ci.org/digital-carver/Kannaadi.jl)
-[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/v8tqnph9rtofj2jd?svg=true)](https://ci.appveyor.com/project/digital-carver/kannaadi-jl)
+[![Appveyor Build status](https://ci.appveyor.com/api/projects/status/n7frjfxtu9dm7cru?svg=true)](https://ci.appveyor.com/project/digital-carver/kannaadi-jl)
 [![Coveralls Status](https://coveralls.io/repos/digital-carver/Kannaadi.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/digital-carver/Kannaadi.jl?branch=master)
 
 [![codecov.io status](http://codecov.io/github/digital-carver/Kannaadi.jl/coverage.svg?branch=master)](http://codecov.io/github/digital-carver/Kannaadi.jl?branch=master)
